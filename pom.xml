@@ -55,9 +55,9 @@
 
     <dependencyManagement>
         <dependencies>
-
+        
             <dependency>
-                <groupId>${project.groupId}</groupId>
+                <groupId>org.osiam.ng</groupId>
                 <artifactId>test-support</artifactId>
                 <version>${project.version}</version>
                 <scope>test</scope>
@@ -186,7 +186,7 @@
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.5.9.201207300726</version>
+                    <version>0.6.2.201302030002</version>
                     <executions>
                         <execution>
                             <goals>
@@ -207,18 +207,16 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.6</version>
+                    <version>2.13</version>
                     <configuration>
                         <includes>
                             <include>**/*Test.java</include>
                             <include>**/*Spec.java</include>
                         </includes>
-                        <additionalClasspathElements>
-                            <additionalClasspathElement>src/main/java</additionalClasspathElement>
-                            <additionalClasspathElement>src/test/groovy</additionalClasspathElement>
-                        </additionalClasspathElements>
                     </configuration>
                 </plugin>
+                
+                <!-- Build Helper: will add Groovy sources to path -->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
@@ -257,12 +255,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-eclipse-plugin</artifactId>
-                    <version>2.8</version>
+                    <version>2.9</version>
                     <configuration>
                         <additionalProjectnatures>
                             <projectnature>org.eclipse.jdt.groovy.core.groovyNature</projectnature>
                         </additionalProjectnatures>
-                        <!-- Source includes is necessary to allow groovy files in the java folder, else eclipse will throw
+                        <!-- Source includes is necessary to allow groovy files in the java folder, else eclipse will throw 
                             a filtering exception -->
                         <sourceIncludes>
                             <sourceInclude>**/*.groovy</sourceInclude>
