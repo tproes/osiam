@@ -12,9 +12,8 @@
     <description>The parent POM for all OSIAM Projects</description>
 
     <modules>
-        <module>authorization-server</module>
-
         <module>test-support</module>
+        <module>authorization-server</module>
         <module>system-test</module>
     </modules>
 
