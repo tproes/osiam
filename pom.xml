@@ -54,7 +54,7 @@
 
     <dependencyManagement>
         <dependencies>
-
+        
             <dependency>
                 <groupId>org.osiam.ng</groupId>
                 <artifactId>test-support</artifactId>
