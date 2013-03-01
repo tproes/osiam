@@ -55,7 +55,7 @@
 
     <dependencyManagement>
         <dependencies>
-        
+
             <dependency>
                 <groupId>org.osiam.ng</groupId>
                 <artifactId>test-support</artifactId>
@@ -213,9 +213,33 @@
                             <include>**/*Test.java</include>
                             <include>**/*Spec.java</include>
                         </includes>
+                        <excludes>
+                            <exclude>%regex[.*SystemSpec.*]</exclude>
+                        </excludes>
                     </configuration>
                 </plugin>
-                
+
+                <!-- Fails Safe: will execute system tests -->
+                <!-- <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>2.11</version>
+                    <configuration>
+                        <includes>
+                            <include>**/*SystemSpec.java</include>
+                        </includes>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin> -->
+
+
                 <!-- Build Helper: will add Groovy sources to path -->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
