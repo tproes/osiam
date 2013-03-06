@@ -20,6 +20,7 @@
 
     <scm>
         <connection>scm:git://git@github.com:osiam-dev/osiam.git</connection>
+	<developerConnection>scm:git://git@github.com:osiam-dev/osiam.git</developerConnection>
     </scm>
 
     <distributionManagement>
