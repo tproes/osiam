@@ -19,7 +19,7 @@
     </modules>
 
     <scm>
-        <connection>scm:git://git@github.com:osiam-dev/osiam.git</connection>
+        <connection>scm:git://git@github.com/osiam-dev/osiam.git</connection>
 	<developerConnection>scm:git:ssh://git@github.com/osiam-dev/osiam.git</developerConnection>
     </scm>
 
