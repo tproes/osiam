@@ -294,11 +294,6 @@
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>0.6.2.201302030002</version>
-                    <configuration>
-                        <excludes>
-                            <exclude>**/org/osiam/ng/test/clients/*</exclude>
-                        </excludes>
-                    </configuration>
                     <executions>
                         <execution>
                             <goals>
