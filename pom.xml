@@ -16,9 +16,26 @@
         <module>oauth2-client</module>
     </modules>
 
+    <profiles>
+        <profile>
+            <id>system-test</id>
+            <modules>
+                <module>system-test</module>
+            </modules>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <scm>
         <connection>scm:git://git@github.com/osiam-dev/osiam.git</connection>
-	<developerConnection>scm:git:ssh://git@github.com/osiam-dev/osiam.git</developerConnection>
+        <developerConnection>scm:git:ssh://git@github.com/osiam-dev/osiam.git</developerConnection>
     </scm>
 
     <distributionManagement>
@@ -398,19 +415,4 @@
         </pluginManagement>
     </build>
 
-    <profiles>
-
-        <profile>
-            <id>system-test</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-    </profiles>
 </project>
