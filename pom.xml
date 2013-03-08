@@ -18,14 +18,10 @@
 
     <profiles>
         <profile>
-            <id>withSystemtest</id>
+            <id>system-test</id>
             <modules>
                 <module>system-test</module>
             </modules>
-        </profile>
-
-        <profile>
-            <id>system-test</id>
             <build>
                 <plugins>
                     <plugin>
