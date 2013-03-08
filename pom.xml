@@ -14,7 +14,6 @@
         <module>test-support</module>
         <module>authorization-server</module>
         <module>oauth2-client</module>
-        <!----><module>system-test</module>
     </modules>
 
     <scm>
