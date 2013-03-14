@@ -17,6 +17,25 @@
         <org.apache.tiles-version>3.0.1</org.apache.tiles-version>
     </properties>
 
+    <scm>
+        <connection>scm:git://git@github.com/osiam-dev/scim.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/osiam-dev/scim.git</developerConnection>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>osiam-repository</id>
+            <name>public evolvis release repository</name>
+            <url>sftp://repo.osiam.org:/var/www/maven_repo/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>OSIAM-NG-SNAPSHOT-repository</id>
+            <name>public evolvis release repository</name>
+            <url>sftp://repo.osiam.org:/var/www/maven_repo/snapshots/</url>
+        </snapshotRepository>
+
+    </distributionManagement>
+
     <repositories>
         <repository>
             <id>spring-milestone</id>
