@@ -17,25 +17,6 @@
         <org.apache.tiles-version>3.0.1</org.apache.tiles-version>
     </properties>
 
-    <scm>
-        <connection>scm:git://git@github.com/osiam-dev/scim.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/osiam-dev/scim.git</developerConnection>
-    </scm>
-
-    <distributionManagement>
-        <repository>
-            <id>osiam-repository</id>
-            <name>public evolvis release repository</name>
-            <url>sftp://repo.osiam.org:/var/www/maven_repo/releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>OSIAM-NG-SNAPSHOT-repository</id>
-            <name>public evolvis release repository</name>
-            <url>sftp://repo.osiam.org:/var/www/maven_repo/snapshots/</url>
-        </snapshotRepository>
-
-    </distributionManagement>
-
     <repositories>
         <repository>
             <id>spring-milestone</id>
@@ -214,20 +195,6 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-            <!-- Needed due to a problem with SSH -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>2.5</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.wagon</groupId>
-                        <artifactId>wagon-ssh</artifactId>
-                        <version>1.0-beta-7</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-
         </plugins>
     </build>
 </project>
