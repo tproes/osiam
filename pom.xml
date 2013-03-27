@@ -40,23 +40,6 @@
         <module>oauth2-client</module>
     </modules>
 
-    <profiles>
-        <profile>
-            <id>system-test</id>
-            <modules>
-                <module>system-test</module>
-            </modules>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
     <scm>
         <connection>scm:git://git@github.com/osiam-dev/osiam.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/osiam-dev/osiam.git</developerConnection>
@@ -125,7 +108,7 @@
         <org.slf4j-version>1.7.2</org.slf4j-version>
         <ch.qos.logback-version>1.0.7</ch.qos.logback-version>
         <org.apache.tiles-version>3.0.1</org.apache.tiles-version>
-
+        <clover.version>3.1.11</clover.version>
     </properties>
 
     <dependencyManagement>
@@ -332,12 +315,10 @@
             <plugins>
 
                 <!-- Configure the compiler plugin for Groovy -->
-
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>2.3.2</version>
+                    <version>2.5.1</version>
                     <extensions>true</extensions>
                     <configuration>
                         <compilerId>groovy-eclipse-compiler</compilerId>
@@ -346,8 +327,12 @@
                         <target>${java.version}</target>
                         <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
-
                     <dependencies>
+                        <dependency>
+                            <groupId>org.codehaus.groovy</groupId>
+                            <artifactId>groovy-eclipse-batch</artifactId>
+                            <version>2.0.6-01</version>
+                        </dependency>
                         <dependency>
                             <groupId>org.codehaus.groovy</groupId>
                             <artifactId>groovy-eclipse-compiler</artifactId>
@@ -356,30 +341,34 @@
                     </dependencies>
                 </plugin>
 
-                <!-- Used from jenkins JaCoCo plugin to generate the coverage reports for sonar -->
+                <!-- Coverage reports for sonar -->
                 <plugin>
-                    <groupId>org.jacoco</groupId>
-                    <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.6.2.201302030002</version>
+                    <groupId>com.atlassian.maven.plugins</groupId>
+                    <artifactId>maven-clover2-plugin</artifactId>
+                    <version>${clover.version}</version>
                     <configuration>
-                        <excludes>
-                            <!-- exlcuded due to jacoco bug: it is throwing an IndexArrayOutOfBufferException when
-                             initialising emails-->
-                            <exclude>*UserEntity*</exclude>
-                        </excludes>
-
+                        <generatePdf>true</generatePdf>
+                        <generateXml>false</generateXml>
+                        <generateJson>false</generateJson>
+                        <generateHtml>true</generateHtml>
+                        <jdk>${java.version}</jdk>
                     </configuration>
                     <executions>
+                        <!-- Run clover setup before test phase-->
                         <execution>
+                            <id>init</id>
+                            <phase>validate</phase>
                             <goals>
-                                <goal>prepare-agent</goal>
+                                <goal>setup</goal>
                             </goals>
                         </execution>
+                        <!-- Run clover aggregate(instrument Java source) and clover(generates an HTML, XML, PDF or JSON report) after test phase-->
                         <execution>
-                            <id>report</id>
-                            <phase>prepare-package</phase>
+                            <id>main</id>
+                            <phase>verify</phase>
                             <goals>
-                                <goal>report</goal>
+                                <goal>aggregate</goal>
+                                <goal>clover</goal>
                             </goals>
                         </execution>
                     </executions>
@@ -397,27 +386,6 @@
                         </includes>
                     </configuration>
                 </plugin>
-
-                <!-- Failssafe: will execute system tests -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>2.11</version>
-                    <configuration>
-                        <includes>
-                            <include>**/*SystemSpec.java</include>
-                        </includes>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>integration-test</goal>
-                                <goal>verify</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-
 
                 <!-- Build Helper: will add Groovy sources to path -->
                 <plugin>
