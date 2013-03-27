@@ -363,7 +363,9 @@
                     <version>0.6.2.201302030002</version>
                     <configuration>
                         <excludes>
-                            <exclude>**/*Entity*</exclude>
+                            <!-- exlcuded due to jacoco bug: it is throwing an IndexArrayOutOfBufferException when
+                             initialising emails-->
+                            <exclude>*UserEntity*</exclude>
                         </excludes>
 
                     </configuration>
