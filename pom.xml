@@ -348,7 +348,7 @@
                     <version>${clover.version}</version>
                     <configuration>
                         <generatePdf>true</generatePdf>
-                        <generateXml>false</generateXml>
+                        <generateXml>true</generateXml>
                         <generateJson>false</generateJson>
                         <generateHtml>true</generateHtml>
                         <jdk>${java.version}</jdk>
