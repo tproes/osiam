@@ -38,6 +38,7 @@
         <org.aspectj-version>1.7.0</org.aspectj-version>
         <org.slf4j-version>1.7.2</org.slf4j-version>
         <org.apache.tiles-version>3.0.1</org.apache.tiles-version>
+        <clover.version>3.1.11</clover.version>
     </properties>
 
     <scm>
@@ -158,14 +159,13 @@
 
 
     <build>
-        <testSourceDirectory>src/test/groovy</testSourceDirectory>
 
         <plugins>
             <!-- Configure the compiler plugin for Groovy -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>2.5.1</version>
                 <extensions>true</extensions>
                 <configuration>
                     <compilerId>groovy-eclipse-compiler</compilerId>
@@ -177,32 +177,48 @@
                 <dependencies>
                     <dependency>
                         <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-eclipse-batch</artifactId>
+                        <version>2.0.6-01</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
                         <artifactId>groovy-eclipse-compiler</artifactId>
                         <version>2.7.0-01</version>
                     </dependency>
                 </dependencies>
             </plugin>
 
-            <!-- Used from jenkins JaCoCo plugin to generate the coverage reports for sonar -->
+            <!-- Coverage reports for sonar -->
             <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.6.2.201302030002</version>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-clover2-plugin</artifactId>
+                <version>${clover.version}</version>
+                <configuration>
+                    <generatePdf>true</generatePdf>
+                    <generateXml>true</generateXml>
+                    <generateJson>false</generateJson>
+                    <generateHtml>true</generateHtml>
+                    <jdk>${java.version}</jdk>
+                </configuration>
                 <executions>
                     <execution>
+                        <id>init</id>
+                        <phase>validate</phase>
                         <goals>
-                            <goal>prepare-agent</goal>
+                            <goal>setup</goal>
                         </goals>
                     </execution>
                     <execution>
-                        <id>report</id>
-                        <phase>prepare-package</phase>
+                        <id>main</id>
+                        <phase>verify</phase>
                         <goals>
-                            <goal>report</goal>
+                            <goal>aggregate</goal>
+                            <goal>clover</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
+
 
             <!-- Surefire: will execute all unit tests including Spock specs and will ignore system tests -->
             <plugin>
@@ -216,10 +232,7 @@
                     </includes>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
