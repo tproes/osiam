@@ -293,38 +293,8 @@
 
         </dependencies>
     </dependencyManagement>
-    <!--<dependencies>-->
-        <!--<dependency>-->
-            <!--<groupId>org.codehaus.gmaven</groupId>-->
-            <!--<artifactId>gmaven-plugin</artifactId>-->
-            <!--<version>1.4</version>-->
-        <!--</dependency>-->
-    <!--</dependencies>-->
-
-
-
     <build>
         <plugins>
-            <!--<plugin>-->
-                <!--<groupId>org.codehaus.gmaven</groupId>-->
-                <!--<artifactId>gmaven-plugin</artifactId>-->
-                <!--<version>1.4</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<goals>-->
-                            <!--<goal>testCompile</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-                <!--<dependencies>-->
-                    <!--<dependency>-->
-                        <!--<groupId>org.codehaus.groovy</groupId>-->
-                        <!--<artifactId>groovy-all</artifactId>-->
-                        <!--<version>2.1.1</version>-->
-                    <!--</dependency>-->
-                <!--</dependencies>-->
-            <!--</plugin>-->
-
             <!-- Attaching sources to the jar files -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -391,6 +361,12 @@
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>0.6.2.201302030002</version>
+                    <configuration>
+                        <excludes>
+                            <exclude>**/*Entity*</exclude>
+                        </excludes>
+
+                    </configuration>
                     <executions>
                         <execution>
                             <goals>
@@ -408,20 +384,17 @@
                 </plugin>
 
                 <!-- Surefire: will execute all unit tests including Spock specs and will ignore system tests -->
-                <!--<plugin>-->
-                    <!--<groupId>org.apache.maven.plugins</groupId>-->
-                    <!--<artifactId>maven-surefire-plugin</artifactId>-->
-                    <!--<version>2.13</version>-->
-                    <!--<configuration>-->
-                        <!--<includes>-->
-                            <!--<include>**/*Test.*</include>-->
-                            <!--<include>**/*Spec.*</include>-->
-                        <!--</includes>-->
-                        <!--<excludes>-->
-                            <!--<exclude>%regex[.*SystemSpec.*]</exclude>-->
-                        <!--</excludes>-->
-                    <!--</configuration>-->
-                <!--</plugin>-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.13</version>
+                    <configuration>
+                        <includes>
+                            <include>**/*Test.*</include>
+                            <include>**/*Spec.*</include>
+                        </includes>
+                    </configuration>
+                </plugin>
 
                 <!-- Failssafe: will execute system tests -->
                 <plugin>
