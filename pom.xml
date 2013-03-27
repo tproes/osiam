@@ -230,9 +230,6 @@
                         <include>**/*Test.java</include>
                         <include>**/*Spec.java</include>
                     </includes>
-                    <excludes>
-                        <exclude>%regex[.*SystemSpec.*]</exclude>
-                    </excludes>
                 </configuration>
             </plugin>
 
