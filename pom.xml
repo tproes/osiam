@@ -133,20 +133,6 @@
                 <version>1.17</version>
             </dependency>
 
-            <!-- needed for HTTP test client -->
-            <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpclient</artifactId>
-                <version>4.2.3</version>
-            </dependency>
-
-            <!-- needed for HTTP test client's getHtmlBody feature -->
-            <dependency>
-                <groupId>org.ccil.cowan.tagsoup</groupId>
-                <artifactId>tagsoup</artifactId>
-                <version>1.2</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.springframework.security.oauth</groupId>
                 <artifactId>spring-security-oauth2</artifactId>
