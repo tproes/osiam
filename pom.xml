@@ -355,6 +355,7 @@
                             <id>main</id>
                             <phase>verify</phase>
                             <goals>
+                                <goal>instrument</goal>
                                 <goal>aggregate</goal>
                                 <goal>clover</goal>
                             </goals>
