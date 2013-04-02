@@ -1,36 +1,12 @@
-<!--
-  ~ Copyright (C) 2013 tarent AG
-  ~
-  ~ Permission is hereby granted, free of charge, to any person obtaining
-  ~ a copy of this software and associated documentation files (the
-  ~ "Software"), to deal in the Software without restriction, including
-  ~ without limitation the rights to use, copy, modify, merge, publish,
-  ~ distribute, sublicense, and/or sell copies of the Software, and to
-  ~ permit persons to whom the Software is furnished to do so, subject to
-  ~ the following conditions:
-  ~
-  ~ The above copyright notice and this permission notice shall be
-  ~ included in all copies or substantial portions of the Software.
-  ~
-  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-  ~ EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-  ~ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-  ~ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-  ~ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-  ~ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-  ~ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-  -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>org.osiam.ng</groupId>
-    <version>0.1-SNAPSHOT</version>
-    <artifactId>scim</artifactId>
-    <packaging>jar</packaging>
-
-    <name>OSIAM SCIM implementation</name>
-
+    <artifactId>scim-root</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>scim-root</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.7</java.version>
@@ -40,11 +16,11 @@
         <org.apache.tiles-version>3.0.1</org.apache.tiles-version>
         <clover.version>3.1.11</clover.version>
     </properties>
-
     <scm>
         <connection>scm:git://git@github.com/osiam-dev/scim.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/osiam-dev/scim.git</developerConnection>
     </scm>
+
 
     <distributionManagement>
         <repository>
@@ -59,7 +35,6 @@
         </snapshotRepository>
 
     </distributionManagement>
-
     <repositories>
         <repository>
             <id>spring-milestone</id>
@@ -85,7 +60,6 @@
             <version>2.1.1</version>
             <scope>test</scope>
         </dependency>
-
         <!-- Spock testing framework for all kinds of tests LICENSE: Apache 2.0 according to http://code.google.com/p/spock/ -->
         <dependency>
             <groupId>org.spockframework</groupId>
@@ -93,7 +67,6 @@
             <version>0.7-groovy-2.0</version>
             <scope>test</scope>
         </dependency>
-
         <!-- Support for mocking concrete classes within Spock LICENSE: Apache 2.0 according to source package -->
         <dependency>
             <groupId>cglib</groupId>
@@ -101,7 +74,6 @@
             <version>2.2.2</version>
             <scope>test</scope>
         </dependency>
-
         <!-- Support for mocking classes without constructor within Spock LICENSE: Apache 2.0 according to http://objenesis.googlecode.com/svn/docs/license.html -->
         <dependency>
             <groupId>org.objenesis</groupId>
@@ -109,74 +81,13 @@
             <version>1.3</version>
             <scope>test</scope>
         </dependency>
-
-
-        <!-- Spring -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${org.springframework-version}</version>
-            <exclusions>
-                <!-- Exclude Commons Logging in favor of SLF4j -->
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${org.springframework-version}</version>
-        </dependency>
-
-        <!-- Servlet API -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
-        </dependency>
-
-        <!-- AspectJ -->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>${org.aspectj-version}</version>
-        </dependency>
-        <!-- @Inject -->
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>1</version>
-        </dependency>
-
         <!-- JSON -->
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
             <version>1.9.9</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>${org.springframework-version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>1.6.11</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>1.6.11</version>
-        </dependency>
     </dependencies>
-
-
     <build>
 
         <plugins>
@@ -272,4 +183,8 @@
 
         </plugins>
     </build>
+    <modules>
+        <module>scim-schema</module>
+        <module>spring</module>
+    </modules>
 </project>
