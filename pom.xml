@@ -16,6 +16,11 @@
         <org.apache.tiles-version>3.0.1</org.apache.tiles-version>
         <clover.version>3.1.11</clover.version>
     </properties>
+    <modules>
+        <module>scim-schema</module>
+        <module>spring</module>
+    </modules>
+
     <scm>
         <connection>scm:git://git@github.com/osiam-dev/scim.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/osiam-dev/scim.git</developerConnection>
@@ -89,8 +94,6 @@
         </dependency>
     </dependencies>
     <build>
-        <testSourceDirectory>src/test/groovy</testSourceDirectory>
-
         <plugins>
             <!-- Configure the compiler plugin for Groovy -->
             <plugin>
@@ -184,8 +187,4 @@
 
         </plugins>
     </build>
-    <modules>
-        <module>scim-schema</module>
-        <module>spring</module>
-    </modules>
 </project>
