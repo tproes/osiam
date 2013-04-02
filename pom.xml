@@ -296,9 +296,6 @@
                     </dependency>
                 </dependencies>
             </plugin>
-
-
-
             <!-- Coverage reports for sonar -->
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
@@ -311,32 +308,12 @@
                     <generateHtml>true</generateHtml>
                     <jdk>${java.version}</jdk>
                 </configuration>
-                <executions>
-                    <!-- Run clover setup before test phase-->
-                    <execution>
-                        <id>init</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>setup</goal>
-                        </goals>
-                    </execution>
-                    <!-- Run clover aggregate(instrument Java source) and clover(generates an HTML, XML, PDF or JSON report) after test phase-->
-                    <execution>
-                        <id>main</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>instrument</goal>
-                            <goal>aggregate</goal>
-                            <goal>clover</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
-
         </plugins>
 
         <pluginManagement>
             <plugins>
+
 
                 <!-- Configure the compiler plugin for Groovy -->
                 <plugin>
