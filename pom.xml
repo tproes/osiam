@@ -89,6 +89,7 @@
         </dependency>
     </dependencies>
     <build>
+        <testSourceDirectory>src/test/groovy</testSourceDirectory>
 
         <plugins>
             <!-- Configure the compiler plugin for Groovy -->
