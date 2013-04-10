@@ -60,6 +60,22 @@
 
     <repositories>
         <repository>
+            <id>osiam releases repo</id>
+            <url>https://repo.osiam.org/releases</url>
+       </repository>
+                <repository>
+            <id>osiam snapshots repo</id>
+            <url>https://repo.osiam.org/snapshots</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+
+        <repository>
             <id>nexus</id>
             <url>http://nexus.codehaus.org</url>
             <releases>
@@ -85,24 +101,6 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-        <repository>
-            <id>osiam releases repo</id>
-            <url>https://repo.osiam.org/releases</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>osiam snapshots repo</id>
-            <url>https://repo.osiam.org/snapshots</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-
 
     </repositories>
 
@@ -276,7 +274,7 @@
             <dependency>
                 <groupId>org.osiam.ng</groupId>
                 <artifactId>scim</artifactId>
-                <version>0.1-SNAPSHOT</version>
+                <version>0.1</version>
             </dependency>
 
             <dependency>
