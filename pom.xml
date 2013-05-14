@@ -166,7 +166,6 @@
                 <version>${org.springframework-version}</version>
             </dependency>
 
-<<<<<<< Updated upstream
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-tx</artifactId>
@@ -189,8 +188,6 @@
                 <version>${org.springframework-version}</version>
             </dependency>
 
-=======
->>>>>>> Stashed changes
 
             <!-- AOP dependency -->
             <dependency>
