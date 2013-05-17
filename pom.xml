@@ -91,6 +91,7 @@
             <artifactId>jackson-mapper-asl</artifactId>
             <version>1.9.9</version>
         </dependency>
+
     </dependencies>
     <build>
         <plugins>
