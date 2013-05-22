@@ -32,10 +32,10 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>authorization-server</artifactId>
+    <artifactId>osiam-server</artifactId>
     <packaging>war</packaging>
 
-    <name>OSIAM Authorization Server</name>
+    <name>OSIAM Server</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
