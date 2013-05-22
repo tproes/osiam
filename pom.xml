@@ -36,7 +36,6 @@
     <modules>
         <module>scim-schema</module>
         <module>osiam-server</module>
-        <!--    <module>oauth2-client</module> -->
     </modules>
 
     <scm>
