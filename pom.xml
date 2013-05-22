@@ -34,7 +34,7 @@
     <description>The parent POM for all OSIAM Projects</description>
 
     <modules>
-        <module>scim</module>
+        <module>scim-schema</module>
         <module>authorization-server</module>
         <!--    <module>oauth2-client</module> -->
     </modules>
@@ -101,6 +101,7 @@
         <ch.qos.logback-version>1.0.7</ch.qos.logback-version>
         <org.apache.tiles-version>3.0.1</org.apache.tiles-version>
         <clover.version>3.1.11</clover.version>
+        <org.aspectj-version>1.7.0</org.aspectj-version>
     </properties>
 
     <dependencyManagement>
