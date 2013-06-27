@@ -35,7 +35,6 @@
     <description>The parent POM for all OSIAM Projects</description>
 
     <modules>
-        <module>scim-schema</module>
         <module>osiam-server</module>
     </modules>
 
@@ -270,20 +269,6 @@
                 <artifactId>jackson-mapper-asl</artifactId>
                 <version>1.9.9</version>
             </dependency>
-
-            <dependency>
-                <groupId>org.osiam.ng</groupId>
-                <artifactId>scim</artifactId>
-                <version>0.2-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.osiam.ng</groupId>
-                <artifactId>scim-schema</artifactId>
-                <version>0.2-SNAPSHOT</version>
-            </dependency>
-
-
         </dependencies>
     </dependencyManagement>
 
