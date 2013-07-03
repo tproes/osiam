@@ -26,6 +26,8 @@ package org.osiam.resources.provisioning;
 import org.osiam.resources.scim.Resource;
 
 import java.lang.reflect.Field;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
 import java.util.*;
 
 /**
@@ -62,9 +64,16 @@ public class GenericSCIMToEntityWrapper {
         Set<String> doNotUpdateThem = deleteAttributes(fields.getTargetFields(), entityFieldWrapper);
 
         for (Map.Entry<String, Field> e : fields.getInputFields().entrySet()) {
-            Field field = fields.getInputFields().get(e.getKey());
-            field.setAccessible(true);
-            if (!target.READ_ONLY_FIELD_SET.contains(e.getKey()) && !doNotUpdateThem.contains(e.getKey())) {
+            final Field field = fields.getInputFields().get(e.getKey());
+            AccessController.doPrivileged(new PrivilegedAction() {
+                public Object run() {
+                    // privileged code goes here
+                    field.setAccessible(true);
+                    return null; // nothing to return
+                }
+            });
+
+            if (!target.readOnlyFieldSet.contains(e.getKey()) && !doNotUpdateThem.contains(e.getKey())) {
                 Object userValue = field.get(user);
                 SCIMEntities.Entity attributes = scimEntities.fromString(e.getKey());
                 if (attributes == null) {
@@ -83,7 +92,7 @@ public class GenericSCIMToEntityWrapper {
         if (mode == Mode.PATCH && user.getMeta() != null) {
             for (String s : user.getMeta().getAttributes()) {
                 String key = s.toLowerCase();
-                if (!target.NOT_DELETABLE.contains(key) && !target.READ_ONLY_FIELD_SET.contains(key)) {
+                if (!target.notDeletable.contains(key) && !target.readOnlyFieldSet.contains(key)) {
                     deleteAttribute(entityFields, entityFieldWrapper, doNotUpdateThem, key);
                 }
             }
@@ -131,7 +140,7 @@ public class GenericSCIMToEntityWrapper {
         Object object = entity;
         GetComplexEntityFields lastEntityFields = null;
         for (int i = 0; i < lastElement; i++) {
-            if (target.READ_ONLY_FIELD_SET.contains(complexMethod[i])) {
+            if (target.readOnlyFieldSet.contains(complexMethod[i])) {
                 return;
             }
             lastEntityFields = new GetComplexEntityFields(entityFields, complexMethod[i], object).invoke();
@@ -145,17 +154,18 @@ public class GenericSCIMToEntityWrapper {
         PATCH, PUT
     }
 
+    // creates a group or user target with corresponding read only and not deletable fields
     public enum For{
         USER(new String[]{"id", "meta", "groups"}, new String[]{"username"}),
 
         GROUP(new String[]{"id", "meta"}, new String[]{"displayname"});
 
-        final Set<String> READ_ONLY_FIELD_SET;
-        final Set<String> NOT_DELETABLE;
+        final Set<String> readOnlyFieldSet;
+        final Set<String> notDeletable;
 
         For(String[] readOnly, String[] notDeleteable) {
-            READ_ONLY_FIELD_SET = new HashSet<>(Arrays.asList(readOnly));
-            NOT_DELETABLE = new HashSet<>(Arrays.asList(notDeleteable));
+            readOnlyFieldSet = new HashSet<>(Arrays.asList(readOnly));
+            notDeletable = new HashSet<>(Arrays.asList(notDeleteable));
         }
     }
 
@@ -175,8 +185,15 @@ public class GenericSCIMToEntityWrapper {
         }
 
         public GetComplexEntityFields invoke() throws IllegalAccessException {
-            Field field = entityFields.get(key);
-            field.setAccessible(true);
+            final Field field = entityFields.get(key);
+            AccessController.doPrivileged(new PrivilegedAction() {
+                public Object run() {
+                    // privileged code goes here
+                    field.setAccessible(true);
+                    return null; // nothing to return
+                }
+            });
+
             lastObjectOfField = field.get(lastObjectOfField);
             Class<?> declaringClass = field.getType();
             entityFields = (new GetFieldsOfInputAndTarget()).getFieldsAsNormalizedMap(declaringClass);
@@ -184,13 +201,19 @@ public class GenericSCIMToEntityWrapper {
         }
 
         public void nullValue(String s) throws IllegalAccessException {
-            Field field = entityFields.get(s);
+            final Field field = entityFields.get(s);
             if (field == null) {
                 throw generateIllegalArgumentException(s);
             } else if (lastObjectOfField == null) {
                 throw generateIllegalArgumentException(key);
             }
-            field.setAccessible(true);
+            AccessController.doPrivileged(new PrivilegedAction() {
+                public Object run() {
+                    // privileged code goes here
+                    field.setAccessible(true);
+                    return null; // nothing to return
+                }
+            });
             field.set(lastObjectOfField, null);
         }
     }
